@@ -5,7 +5,7 @@ import (
 )
 
 func main() {
-	test3DES()
+	testDES()
 
 }
 
@@ -28,8 +28,8 @@ func testDES() {
 
 func test3DES() {
 
-	str := `今天是一个晴朗的天气`
-	fmt.Println("-----------文本：-----------------------------------\n", str)
+	str := `今天是一个晴朗的天气,GOOd,luck!`
+	fmt.Println("[文本]：\n", str)
 	src := encode(str)
 	fmt.Println("\n======================" + "DES 加解密" + "=======================================================================")
 	fmt.Println("[明文]：\n", src, "\n明文长度:", len(src))
@@ -39,6 +39,6 @@ func test3DES() {
 	src3 := decrypt3DES(src2, key)
 	fmt.Println("[明文]\n", src3, "\n明文长度:", len(src3))
 	fmt.Println("======================" + "DES 加解密 END" + "=======================================================================")
-	fmt.Println("\n-----------明文解码后得到文本：--------------------------\n", decode(src3))
+	fmt.Println("\n[文本]:\n", decode(src3))
 
 }
