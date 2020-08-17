@@ -3,14 +3,10 @@ package main
 import (
 	"crypto/cipher"
 	"crypto/des"
+	"fmt"
 )
 
-//cryptDES 使用DES加密算法对明文进行加密
-/*
-[src:需要加密的明文
-key:密钥
-RETURN:加密后的密文]
-*/
+//cryptDES 使用DES加密算法对明文进行加密-->{src:需要加密的明文,key:密钥,RETURN:加密后的密文}
 func cryptDES(src, key []byte) []byte {
 
 	//(声明密钥)创建并返回一个，密钥为key的，使用DES加密的，cipher.block接口
@@ -29,12 +25,7 @@ func cryptDES(src, key []byte) []byte {
 
 }
 
-//decryptDES 使用DES加密算法对密文进行解密
-/*
-[src:需要解密的明文
-key:密钥
-RETURN:解密后的密文]
-*/
+//decryptDES 使用DES加密算法对密文进行解密-->{src:需要解密的明文,key:密钥,RETURN:解密后的密文}
 func decryptDES(src, key []byte) []byte {
 
 	//(声明密钥)创建并返回一个，密钥为key的，使用DES加密的，cipher.block接口
@@ -51,5 +42,22 @@ func decryptDES(src, key []byte) []byte {
 
 	dst = unPadding(dst)
 	return dst
+
+}
+
+func testDES() {
+
+	str := `你好，我叫瓜江君，今年已经毕业了`
+	fmt.Println("-----------文本：-----------------------------------\n", str)
+	src := encode(str)
+	fmt.Println("\n======================" + "DES 加解密" + "=======================================================================")
+	fmt.Println("[明文]：\n", src, "\nlen:", len(src))
+	key := []byte("abcdabcd")
+	src2 := cryptDES(src, key)
+	fmt.Println("[密文]：\n", src2, "\nlen:", len(src2))
+	src3 := decryptDES(src2, key)
+	fmt.Println("[明文]\n", src3, "\nlen:", len(src3))
+	fmt.Println("======================" + "DES 加解密 END" + "=======================================================================")
+	fmt.Println("\n-----------明文解码后得到文本：--------------------------\n", decode(src3))
 
 }
